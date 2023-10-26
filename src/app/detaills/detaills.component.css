@@ -1,0 +1,15 @@
+.box{
+    width: 300px;
+    height: 400px;
+    background-color: rgb(81, 99, 218);
+    margin-top: 100px;
+    margin-right: 10px;
+    border-radius: 5px;
+   
+    color: rgb(240, 242, 255);
+}
+.center-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

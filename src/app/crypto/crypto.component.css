@@ -1,0 +1,22 @@
+.box{
+    width: 200px;
+    height: 150px;
+    background-color: rgb(81, 99, 218);
+    margin-top: 100px;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        
+    
+    color: rgb(240, 242, 255);
+}
+a{
+    text-decoration: none;
+    color: rgb(240, 242, 255);
+}
+.example-full-width {
+    width: 100%;
+  }
+  

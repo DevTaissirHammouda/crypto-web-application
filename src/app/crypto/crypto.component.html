@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+		
+		<div class="search-box" >
+           
+            <input type="text"  class="input-search example-full-width " placeholder="Type to Search..." [(ngModel)]="term">
+          </div>
+<div class="box" *ngFor="let i of allCrypto | filterSearch:term" >
+  
+   <a [routerLink]="['detaills',i.symbol]">{{i.symbol}}</a>
+   
+    
+</div>
+</div>
+</div>
