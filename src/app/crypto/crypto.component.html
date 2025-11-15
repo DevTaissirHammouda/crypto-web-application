@@ -1,15 +1,152 @@
-<div class="container">
-    <div class="row">
-		
-		<div class="search-box" >
-           
-            <input type="text"  class="input-search example-full-width " placeholder="Type to Search..." [(ngModel)]="term">
+<div class="crypto-dashboard">
+  <!-- Stats Overview -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-label">Total Coins</div>
+        <div class="stat-value">{{allCrypto.length || 0}}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-label">24h Volume</div>
+        <div class="stat-value">$2.4T</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-label">Market Cap</div>
+        <div class="stat-value">$1.8T</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 6v6l4 2"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-label">BTC Dominance</div>
+        <div class="stat-value">54.2%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter and Sort Controls -->
+  <div class="controls-container">
+    <div class="search-wrapper">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search cryptocurrencies..." [(ngModel)]="term">
+    </div>
+
+    <div class="filter-buttons">
+      <button class="filter-btn active">All Coins</button>
+      <button class="filter-btn">Favorites</button>
+      <button class="filter-btn">Trending</button>
+      <button class="filter-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="21" x2="4" y2="14"></line>
+          <line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line>
+          <line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line>
+          <line x1="9" y1="8" x2="15" y2="8"></line>
+          <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+        Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Crypto Cards Grid -->
+  <div class="crypto-grid">
+    <div class="crypto-card card-hover" *ngFor="let crypto of allCrypto | filterSearch:term" [routerLink]="['detaills', crypto.symbol]">
+      <div class="card-header">
+        <div class="crypto-info">
+          <img [src]="crypto.iconUrl" [alt]="crypto.name" class="crypto-icon" onerror="this.src='https://cdn.jsdelivr.net/npm/cryptocurrency-icons@latest/svg/color/generic.svg'">
+          <div class="crypto-name-section">
+            <h3 class="crypto-name">{{crypto.name}}</h3>
+            <span class="crypto-symbol">{{crypto.symbol}}</span>
           </div>
-<div class="box" *ngFor="let i of allCrypto | filterSearch:term" >
-  
-   <a [routerLink]="['detaills',i.symbol]">{{i.symbol}}</a>
-   
-    
-</div>
-</div>
+        </div>
+        <div class="crypto-rank">
+          #{{crypto.rank}}
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="price-section">
+          <div class="current-price">${{formatPrice(crypto.price)}}</div>
+          <div class="price-change" [ngClass]="crypto.change >= 0 ? 'positive' : 'negative'">
+            <svg *ngIf="crypto.change >= 0" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+            <svg *ngIf="crypto.change < 0" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            {{crypto.change}}%
+          </div>
+        </div>
+
+        <div class="crypto-stats">
+          <div class="stat-row">
+            <span class="stat-label">Market Cap</span>
+            <span class="stat-value">${{formatLargeNumber(crypto.marketCap)}}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">24h Volume</span>
+            <span class="stat-value">${{formatLargeNumber(crypto['24hVolume'])}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <div class="sparkline-placeholder">
+          <svg width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none" class="mini-chart">
+            <path [attr.d]="generateSparkline(crypto)" [attr.stroke]="crypto.change >= 0 ? '#10b981' : '#ef4444'" fill="none" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="!allCrypto || allCrypto.length === 0" class="loading-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading cryptocurrencies...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="allCrypto && allCrypto.length > 0 && (allCrypto | filterSearch:term).length === 0" class="empty-state">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <h3>No cryptocurrencies found</h3>
+    <p>Try adjusting your search criteria</p>
+  </div>
 </div>

@@ -1,66 +1,138 @@
-*{
-    box-sizing: border-box;
-    text-align: center;
+.app-header {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.3s ease-out;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  color: var(--primary-color);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.nav-link {
+  padding: 0.625rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.nav-link.active {
+  color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--primary-color);
+}
+
+.primary-btn {
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .nav-menu {
+    display: none;
   }
 
-  .search-box{
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-    margin: auto;
+  .header-content {
+    gap: 1rem;
   }
-  .input-search{
-    height: 50px;
-    width: 50px;
-    border-style: none;
-    padding: 10px;
-    font-size: 18px;
-    letter-spacing: 2px;
-    outline: none;
-    border-radius: 25px;
-    transition: all .5s ease-in-out;
-    background-color: #22a6b3;
-    padding-right: 40px;
-    color:#fff;
-  }
-  .input-search::placeholder{
-    color:rgba(255,255,255,.5);
-    font-size: 18px;
-    letter-spacing: 2px;
-    font-weight: 100;
-  }
-  .btn-search{
-    width: 50px;
-    height: 50px;
-    border-style: none;
-    font-size: 20px;
-    font-weight: bold;
-    outline: none;
-    cursor: pointer;
-    border-radius: 50%;
-    position: absolute;
-    right: 0px;
-    color:#ffffff ;
-    background-color:transparent;
-    pointer-events: painted;  
-  }
-  .btn-search:focus ~ .input-search{
-    width: 300px;
-    border-radius: 0px;
-    background-color: transparent;
-    border-bottom:1px solid rgba(255,255,255,.5);
-    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-  }
-  .input-search:focus{
-    width: 300px;
-    border-radius: 0px;
-    background-color: transparent;
-    border-bottom:1px solid rgba(255,255,255,.5);
-    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-  }
-  
+}
 
-  h1{
-    color: #fff;
-    margin-bottom: 100px;
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0.75rem 0;
   }
+
+  .logo-text {
+    font-size: 1.25rem;
+  }
+
+  .primary-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+}

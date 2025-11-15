@@ -1,15 +1,361 @@
-.box{
-    width: 300px;
-    height: 400px;
-    background-color: rgb(81, 99, 218);
-    margin-top: 100px;
-    margin-right: 10px;
-    border-radius: 5px;
-   
-    color: rgb(240, 242, 255);
+.details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
 }
-.center-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* Back Button */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.back-button:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--primary);
+  transform: translateX(-4px);
+}
+
+.back-button i {
+  font-size: 1.2rem;
+}
+
+/* Crypto Header */
+.crypto-header {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.crypto-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.crypto-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.crypto-title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.crypto-title .symbol {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.crypto-title .rank-badge {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e293b;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.price-change {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.price-change.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.price-change.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Stat Cards */
+.stat-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+}
+
+.stat-card h3 {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.stat-card .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-card .value i {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+/* Chart Section */
+.chart-section {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.chart-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  color: white;
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  margin-bottom: 1.5rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-path {
+  fill: url(#gradient);
+  stroke: var(--primary);
+  stroke-width: 2;
+  opacity: 0.8;
+}
+
+.time-periods {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.time-period {
+  padding: 0.6rem 1.2rem;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.time-period:hover,
+.time-period.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Info Section */
+.info-section {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.info-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  color: white;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.info-value {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Links Section */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.link-card:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.link-card i {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(99, 102, 241, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .details-container {
+    padding: 1rem;
+  }
+
+  .crypto-header {
+    padding: 1.5rem;
+  }
+
+  .crypto-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .current-price {
+    font-size: 2rem;
+  }
+
+  .stat-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
 }
